@@ -10,5 +10,5 @@ jobs:
       - name: Build and push the image
         run: |
           docker login --username mhaddad98 --password ${{secrets.GHCR_PAC}} ghcr.io
-          docker build . --tag ghcr.io/mhaddad98/coffee-assessment-backend:latest
-          docker push ghcr.io/mhaddad98/coffee-assessment-backend:latest
+          docker build -f Dockerfile.server . --tag ghcr.io/mhaddad98/coffee-assessment-server-backend:latest
+          docker push ghcr.io/mhaddad98/coffee-assessment-server-backend:latest
