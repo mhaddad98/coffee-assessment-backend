@@ -7,7 +7,9 @@ export async function runWorkflow(order: Order) {
     const connection = await Connection.connect({
       address: "temporal:7233",
     });
-    const temporalClient = new WorkflowClient();
+    const temporalClient = new WorkflowClient({
+      connection,
+    });
 
     const taskQueue = "coffeeOrders";
     const workflowId = `Ord-${order.id}`;
