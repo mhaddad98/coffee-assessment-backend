@@ -15,7 +15,7 @@ export async function addTask({
 }): Promise<void> {
   const msg = JSON.stringify({ task, order, status });
   await publishMessageToExchange("amq.topic", `order.${task}`, msg);
-  await axios.post("http://localhost:3001/task/add", {
+  await axios.post("http://coffe-assessment-server:3001/task/add", {
     task,
     order,
     status,
