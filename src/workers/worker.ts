@@ -1,12 +1,12 @@
-import { Worker } from "@temporalio/worker";
+import { Worker, NativeConnection } from "@temporalio/worker";
 import * as activities from "../activities";
-import { Connection } from "@temporalio/client";
 
 async function runWorker() {
-  const connection = await Connection.connect({
+  const connection = await NativeConnection.connect({
     address: "temporal:7233",
   });
   const worker = await Worker.create({
+    connection,
     workflowsPath: require.resolve("../workflows"),
     activities,
     taskQueue: "coffeeOrders",
