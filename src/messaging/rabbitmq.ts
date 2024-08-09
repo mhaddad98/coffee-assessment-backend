@@ -5,7 +5,7 @@ let channel: Channel | null = null;
 
 export async function getRabbitMQConnection(): Promise<Connection> {
   if (!connection) {
-    connection = await amqplib.connect("amqp://localhost");
+    connection = await amqplib.connect("amqp://rabbitmq");
   }
   return connection;
 }

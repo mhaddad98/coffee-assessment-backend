@@ -1,9 +1,12 @@
-import { WorkflowClient } from "@temporalio/client";
+import { Connection, WorkflowClient } from "@temporalio/client";
 import { Order } from "../server/models/OrderModel";
 import { coffeeWorkflow } from "../workflows/coffeeWorkflow";
 
 export async function runWorkflow(order: Order) {
   try {
+    const connection = await Connection.connect({
+      address: "temporal:7233",
+    });
     const temporalClient = new WorkflowClient();
 
     const taskQueue = "coffeeOrders";
