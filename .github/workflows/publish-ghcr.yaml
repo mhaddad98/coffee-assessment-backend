@@ -7,8 +7,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Build and push the image
+      - name: Build and push the Server image
         run: |
           docker login --username mhaddad98 --password ${{secrets.GHCR_PAC}} ghcr.io
           docker build -f Dockerfile.server . --tag ghcr.io/mhaddad98/coffee-assessment-server-backend:latest
           docker push ghcr.io/mhaddad98/coffee-assessment-server-backend:latest
+      - name: Build and push the Worker image
+              run: |
+                docker login --username mhaddad98 --password ${{secrets.GHCR_PAC}} ghcr.io
+                docker build -f Dockerfile.worker . --tag ghcr.io/mhaddad98/coffee-assessment-worker-backend:latest
+                docker push ghcr.io/mhaddad98/coffee-assessment-worker-backend:latest
