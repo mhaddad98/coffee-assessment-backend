@@ -1,11 +1,13 @@
-import { Client } from "@temporalio/client";
+import { Client, Connection } from "@temporalio/client";
 
 export async function sendSignal(
   workflowId: string,
   signalName: string,
   signalValue: any
 ): Promise<void> {
-  const client = new Client();
+  const connection = await Connection.connect({ address: "temporal:7233" });
+
+  const client = new Client({ connection });
   try {
     const handle = client.workflow.getHandle(workflowId);
     await handle.signal(signalName, signalValue);
